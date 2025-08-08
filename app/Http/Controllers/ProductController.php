@@ -33,8 +33,7 @@ class ProductController extends Controller
             'stock' => 'required|integer',
             'price' => 'required|numeric',
         ]);
-
-        Product::create([$request->all()]);
+        Product::create($request->all());
 
         return redirect()->route('product.index');
     }

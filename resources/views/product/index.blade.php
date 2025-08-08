@@ -21,18 +21,19 @@
                         </thead>
 <tbody>
     @foreach ($products as $p)
-    <tr class="border-b">
-        <td class="p-2">{{ $loop->iteration }}</td>
-        <td class="p-2">{{ $p->name }}</td>
-        <td class="p-2">{{ $p->stock }}</td>
-        <td class="p-2">{{ $p->price }}</td>
-<a href="/product/{{ $p->id }}/edit">
+    <a href="/product/{{ $p->id }}/edit">
         <x-primary-button>Edit</x-primary-button>
         </a>
         <form method="POST" action="{{ route('product.destroy', $p->id) }}" class="inline">
             @csrf
             @method('delete')
             <x-danger-button class="ms-2">Hapus</x-danger-button>
+    <tr class="border-b">
+        <td class="p-2">{{ $loop->iteration }}</td>
+        <td class="p-2">{{ $p->name }}</td>
+        <td class="p-2">{{ $p->stock }}</td>
+        <td class="p-2">{{ $p->price }}</td>
+
         </form>
     </td>
 </tr>
