@@ -28,7 +28,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
+        Product::create([$request->all()]);
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -44,7 +52,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -52,14 +61,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
+        Product::create([$request->all()]);
+
+        return redirect()->route('product.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Product::find($id)->delete();
+        return redirect()->route('product.index');
     }
 }
