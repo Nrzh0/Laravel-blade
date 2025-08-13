@@ -30,12 +30,18 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'stock' => 'required|integer',
-            'price' => 'required|numeric',
+            'description' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           
         ]);
-        Product::create($request->all());
+        $data = $request->only(['name', 'description', 'price', 'stock', 'image']);
 
-        return redirect()->route('product.index');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
+        Product::create($data);
     }
 
     /**
@@ -62,11 +68,13 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'stock' => 'required|integer',
-            'price' => 'required|numeric',
+            'description' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           
         ]);
-
-        Product::create([$request->all()]);
+        Product::find($id)->update($request->all());
 
         return redirect()->route('product.index');
     }
