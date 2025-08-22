@@ -27,7 +27,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    { 
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -42,6 +42,7 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('images', 'public');
         }
         Product::create($data);
+        return redirect()->route('product.index');
     }
 
     /**

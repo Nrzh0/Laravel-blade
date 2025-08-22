@@ -9,6 +9,10 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
     <div class="p-6 text-gray-900">
+       <a href="/product/create">
+            <x-primary-button>Tambah Produk</x-primary-button>
+
+    </a>  
     <table class="w-full text-gray-500">
         <thead class="bg -gray-50">
             <tr>
@@ -21,10 +25,7 @@
             <td class="p-3">AKSI</td>
 
 
-        <a href="/product/create">
-            <x-primary-button>Tambah Produk</x-primary-button>
-
-    </a>
+       
     </tr>
     </thead>
     <tbody>
@@ -50,7 +51,7 @@
             <form action="{{ route('product.destroy', $p->id) }}" method="POST" class="inline">
                 @csrf
                 @method('DELETE')
-                <x-danger-button class="ms-2">Hapus</x-danger-button>
+                <x-danger-button class="mt-2">Hapus</x-danger-button>
                 </form>
     </td>
 </tr>
